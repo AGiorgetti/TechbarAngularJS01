@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bootstrap 101 Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="../css/StyleSheet.css" rel="stylesheet" media="screen">
+    </head>
+    <body data-ng-controller="shell">
+        <div class="container">
+
+            <div class="starter-template">
+                <h1>{{title}}</h1>
+            </div>
+            <hr />
+            <div data-ng-controller="controller1">
+                <input type="text" data-ng-model="data.text" />
+                <div>This is your text: <h2>{{data.text}}</h2></div>
+            </div>
+            <hr />
+            <div data-ng-controller="controller2">
+                <input type="text" data-ng-model="data.text" />
+                <div>This is your text: <h2>{{data.text}}</h2></div>
+            </div>
+        </div><!-- /.container -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-2.0.3.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/angular.js"></script>
+        <script>
+            // step 1 - define a module and its dependencies
+            var app = angular.module('myApp', []);
+            // step 2 - define your controller
+            app.controller('shell', ['$rootScope', '$scope',
+                function ($rootScope, $scope) {
+                    $scope.title = "Communication Between Controllers - using a serive";
+                } ]);
+            app.service('dataprovider', function () {
+                // this is my data provider service
+                return {
+                    text: '...'
+                };
+            });
+            app.controller('controller1', ['$scope', 'dataprovider',
+                function ($scope, dataprovider) {
+                    $scope.data = dataprovider;
+                } ]);
+            app.controller('controller2', ['$scope', 'dataprovider',
+                function ($scope, dataprovider) {
+                    $scope.data = dataprovider;
+                } ]);
+            
+            // step 3 - manual initialization (you have to do it in document.ready to have Batarang working).
+            angular.element(document).ready(function () {
+                angular.bootstrap(document, ['myApp']);
+            });
+        </script>
+    </body>
+</html>

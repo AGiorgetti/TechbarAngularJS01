@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp" data-ng-controller="pageController">
+    <head>
+        <title>Hello {{ userinput }} </title>
+        <style>
+            body {
+                font-family: Consolas;
+                font-size: large;
+                padding: 30px;
+                }
+            input {
+                font-size: x-large;
+            }
+        </style>
+    </head>
+    <body >
+        <div >
+            <input type="text" data-ng-model="userinput" />
+            <div>This is your text: <h2>{{userinput}}</h2></div>
+        </div>
+        <script src="../js/angular.js"></script>
+        <script>
+            angular
+                .module('myApp', [])
+                .controller('pageController', function ($scope) {
+                    $scope.message = 'AngularJS';
+                    $scope.userinput = '';
+                });
+        </script>
+    </body>
+</html>

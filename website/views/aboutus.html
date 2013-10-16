@@ -1,0 +1,14 @@
+<div>
+    <div class="starter-template">
+        <h1>{{title}}</h1>
+    </div>
+    <hr />
+    <div class="starter-template">
+        <div data-ng-repeat="guy in guys">
+            <h2>{{guy.name}}</h2>
+            <p>Twitter: <a href="{{guy.twitterUrl}}">{{guy.twitter}}</a></p>
+            <p>Facebook: <a href="{{guy.facebookUrl}}">{{guy.facebook}}</a></p>
+            <p>Twitter: <a href="mailto:{{guy.email}}">{{guy.email}}</a></p>
+        </div>
+    </div>
+</div>

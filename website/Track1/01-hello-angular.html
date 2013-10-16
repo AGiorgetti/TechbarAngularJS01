@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp">
+    <head>
+        <title>Hello {{ message }}</title>
+        <style>
+            body {
+                font-family: Consolas;
+                font-size: large;
+                padding: 30px;
+                }
+        </style>
+    </head>
+    <body >
+        <div data-ng-controller="helloWorldController">
+            Hello {{ message }}
+        </div>
+        <script src="../js/angular.js"></script>
+        <script>
+            // step 1 - define a module and its dependencies
+            var app = angular.module('myApp', []);
+            // step 2 - define your controller
+            app.controller('helloWorldController', function ($scope) {
+                $scope.message = "AngularJS";
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bootstrap 101 Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="../css/StyleSheet.css" rel="stylesheet" media="screen">
+
+    </head>
+    <body data-ng-controller="shell">
+        <div class="container">
+
+            <div class="starter-template">
+                <h1>{{title}}</h1>
+            </div>
+            <h3>Communication using $rootScope</h3>
+            <input type="text" data-ng-model="text" />
+            <div>This is your text: <h2>{{text}}</h2></div>
+            <hr />
+            <div data-ng-controller="controller1">
+            <input type="text" data-ng-model="text" />
+            <div>This is your text: <h2>{{text}}</h2></div>
+            </div>   
+            <hr />
+            <div data-ng-controller="controller2">
+            <input type="text" data-ng-model="text" />
+            <div>This is your text: <h2>{{text}}</h2></div>
+            </div>                
+        </div><!-- /.container -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-2.0.3.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/angular.js"></script>
+        <script>
+
+            
+            // step 1 - define a module and its dependencies
+            var app = angular.module('myApp', []);
+            // step 2 - define your controller
+            app.controller('shell', ['$rootScope', '$scope',
+                function ($rootScope, $scope) {
+                    $scope.title = "Communication Between Controllers - $rootScope";
+            
+                    $scope.text = '...'; // <- this is a value type!!! a value is copied in child scopes and overrides this one!.
+                                         // so if you wanna be sure to share data between controllers and retain the proper references to
+                                         // your objects, beware of the 'dots'.
+                }]);
+            app.controller('controller1', ['$scope', 
+                function($scope) {
+            
+                }]);
+            app.controller('controller2', ['$scope', 
+                function($scope) {
+            
+                }]);
+            // step 3 - manual initialization (you have to do it in document.ready to have Batarang working).
+            angular.element(document).ready(function () {
+                angular.bootstrap(document, ['myApp']);
+            });
+        </script>
+    </body>
+</html>

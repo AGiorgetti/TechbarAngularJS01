@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>06 - directive bonus</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="../css/StyleSheet.css" rel="stylesheet" media="screen">
+    </head>
+    <body data-ng-controller="shell">
+        <div class="container">
+
+            <div class="starter-template">
+                <h1>{{title}}</h1>
+            </div>
+            <button class="btn" data-ng-click="setUndefined()">Set undefined</button>
+            <br />
+                selected:<pre>{{selected | json}}</pre>
+            <br />
+            <div data-select-dropdown="" data-list="list" data-ng-model="selected"></div>
+
+        </div><!-- /.container -->
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="../js/jquery-2.0.3.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/angular.js"></script>
+        <script src="../viewmodels/controls.js"></script>
+        <script>
+            // step 1 - define a module and its dependencies
+            var app = angular.module('myApp', ['myControls']);
+            // step 2 - define your controller
+            app.controller('shell', ['$scope',
+                function ($scope) {
+                    $scope.title = "Dropdown directive";
+            
+                    $scope.list = [
+                        {
+                            text: 'select...',
+                            value: '',
+                            description: '',
+                            imageSrc: '../images/01.jpg'
+                        },
+                        {
+                            text: 'A',
+                            value: 'A',
+                            description: ' - long description for A',
+                            imageSrc: '../images/01.jpg'
+                        },
+                        {
+                            text: 'B',
+                            value: 'B',
+                            description: ' - long description for B',
+                            imageSrc: '../images/01.jpg'
+                        },
+                        {
+                            divider: true
+                        },
+                        {
+                            text: 'C',
+                            value: 'C',
+                            description: ' - long description for C',
+                            imageSrc: '../images/01.jpg'
+                        }
+                    ];
+            
+                    $scope.selected = $scope.list[1];
+            
+                    $scope.setUndefined = function () {
+                        $scope.selected = undefined;
+                    };
+            
+                } ]);
+            
+            // step 3 - manual initialization (you have to do it in document.ready to have Batarang working).
+            angular.element(document).ready(function () {
+                angular.bootstrap(document, ['myApp']);
+            });
+        </script>
+    </body>
+</html>

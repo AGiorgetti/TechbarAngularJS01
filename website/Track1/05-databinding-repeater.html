@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp" data-ng-controller="pageController">
+    <head>
+        <title>Hello {{ userinput }} </title>
+        <style>
+            body {
+                font-family: Consolas;
+                font-size: large;
+                padding: 30px;
+                }
+            input {
+                font-size: x-large;
+            }
+        </style>
+    </head>
+    <body >
+        <div >
+            <button ng-click="createRows(10)">Genera 10 righe</button>
+        </div>
+        <table>
+            <thead>
+            <tr>                
+                <th>NR</th>
+                <th>Text</th>
+            </tr>
+            </thead>
+        <tbody>
+            <tr ng-repeat="i in rows">
+                <td>{{ i.number }}</td>
+                <td>
+                    <input ng-model="i.text"></input>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+        <script src="../js/angular.js"></script>
+        <script>
+            angular
+                .module('myApp', [])
+                .controller('pageController', function ($scope) {
+                    $scope.rows = [];
+                    $scope.createRows = function (totRows) {
+                        var c
+                        for (c = 1; c <= totRows; c++) {
+                            $scope.rows.push({
+                                number : c,
+                                text : "Row nr " + c
+                            });
+                        }
+                    }
+                });
+        </script>
+    </body>
+</html>

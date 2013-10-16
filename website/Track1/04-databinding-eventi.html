@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html data-ng-app="myApp" data-ng-controller="pageController">
+    <head>
+        <title>Hello {{ userinput }} </title>
+        <style>
+            body {
+                font-family: Consolas;
+                font-size: large;
+                padding: 30px;
+                }
+            input {
+                font-size: x-large;
+            }
+        </style>
+    </head>
+    <body >
+        <div >
+            <input type="number" data-ng-model="a" /> +
+            <input type="number" data-ng-model="b" /> 
+            <button data-ng-click="sum()">=</button>
+            {{ result }}
+        </div>
+        <div >
+            <input type="number" data-ng-model="a2" /> +
+            <input type="number" data-ng-model="b2" /> 
+            <button data-ng-click="sum2(a2,b2)">=</button>
+            {{ result2 }}
+        </div>
+        <script src="../js/angular.js"></script>
+        <script>
+            angular
+                .module('myApp', [])
+                .controller('pageController', function ($scope) {
+                    $scope.message = 'AngularJS';
+                    $scope.a = 1;
+                    $scope.b = 2;
+
+                    $scope.sum = function () {
+                        $scope.result = $scope.a + $scope.b;
+                    };
+                    $scope.sum2 = function (a,b) {
+                        $scope.result2 = a + b;
+                    };
+                });
+        </script>
+    </body>
+</html>
