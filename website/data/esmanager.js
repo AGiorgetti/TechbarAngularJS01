@@ -51,8 +51,24 @@ angular.module('esmngr', [])
                 "url":url
             });
         }
+
+        this.search = function(text){
+            var deferred = $q.defer();
+
+            $http.get(_endpoint+'/images/photo/_search?q='+text).then(function(response){
+                $log.log('response is', response);
+                var results = [];
+                angular.forEach(response.data.hits.hits, function(hit){
+                    results.push(hit._source);
+                });
+
+                deferred.resolve(results);
+            });
+
+            return deferred.promise;
+        }
     })
-    .controller('mainCtrl', function ($scope, $log, $http, es) {
+    .controller('mainCtrl', function ($scope, $log, es) {
         es.getStatus().then(function (status) {
             $log.log('connected to ' + status.data.name);
         });
@@ -65,7 +81,14 @@ angular.module('esmngr', [])
             });
         }
 
-        $scope.add = function(id, title, url){
-            es.savePhoto(id, title, url);
+        $scope.add = function(id, title, description, url){
+            es.savePhoto(id, title, description, url);
+        }
+    })
+    .controller('searchCtrl', function($scope, es){
+        $scope.searchText = '';
+
+        $scope.search = function(){
+            $scope.photos = es.search($scope.searchText);
         }
     });
