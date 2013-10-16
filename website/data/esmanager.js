@@ -58,8 +58,14 @@ angular.module('esmngr', [])
         });
         $scope.createIndex = function () {
             es.createIndex().then(function () {
-                es.savePhoto(1, "Photo Nr 1", "Taken in my last trip to Ireland", "http://flickr.com/");
-                es.savePhoto(2, "Photo Nr 2", "Sunset", "http://flickr.com/");
+                es.savePhoto(1, "Inverno", "Pian grande, Castelluccio di Norcia", "http://farm8.staticflickr.com/7030/6655446883_5f6a85fed9.jpg");
+                es.savePhoto(2, "Autunno", "Rosso Conero, Fattoria le Terrazze. Sulla strada tra Castelfidardo e Sirolo", "http://farm8.staticflickr.com/7159/6453186083_da35497b6b.jpg");
+                es.savePhoto(3, "Nebbia", "Loreto vista da Castelfidardo poco dopo l'alba", "http://farm6.staticflickr.com/5082/5378313461_5f1ffc1d4b.jpg");
+                es.savePhoto(4, "Sassotetto", "Strada che conduce da Sassotetto a Bolognola ", "http://farm6.staticflickr.com/5250/5254415685_019348b088.jpg");
             });
+        }
+
+        $scope.add = function(id, title, url){
+            es.savePhoto(id, title, url);
         }
     });
