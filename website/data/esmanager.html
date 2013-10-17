@@ -4,10 +4,10 @@
     <title>ES Manager</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <script src="../js/angular.js"></script>
-    <script src="../js/angular-resource.js"></script>
+    <script src="../js/angular-route.js"></script>
     <script src="esmanager.js"></script>
 </head>
-<body data-ng-controller="mainCtrl">
+<body >
 <!-- Static navbar -->
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
@@ -30,65 +30,7 @@
     </div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <button class="btn btn-primary" ng-click="createIndex()">Create index</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <form class="form-horizontal" role="form" ng-submit="add(id, title, description, url)">
-                <div class="form-group">
-                    <label for="photoId" class="col-lg-2 control-label">Id</label>
-
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="photoId" placeholder="Id" ng-model="id">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="photoTitle" class="col-lg-2 control-label">Title</label>
-
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="photoTitle" placeholder="Title" ng-model="title">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="photoDescription" class="col-lg-2 control-label">Description</label>
-
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="photoDescription" placeholder="Description"
-                               ng-model="description">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="photoUrl" class="col-lg-2 control-label">Url</label>
-
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" id="photoUrl" placeholder="http://flickr.com/"
-                               ng-model="url">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </div>
-    <div class="row" data-ng-controller="searchCtrl">
-        <div class="col-xs-12">
-            <input type="search" ng-model="searchText" ng-change="search()">
-        </div>
-        <div class="col-xs-12 col-md-6" data-ng-repeat="p in photos">
-            <img title="p.title" ng-src="{{p.url}}"/>
-            <span>{{p.description}}</span>
-        </div>
-    </div>
-    <div class="row">
-        <pre>{{photos | json}}</pre>
-    </div>
+    <div ng-view></div>
 </div>
 </body>
 </html>

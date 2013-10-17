@@ -1,9 +1,28 @@
-angular.module('esmngr', [])
+angular.module('esmngr', ['ngRoute'])
     /*
      .config(['$sceDelegateProvider', function ($sceDelegateProvider) {
      $sceDelegateProvider.resourceUrlWhitelist(['self', 'http://localhost:9200/**']);
      }])
      */
+    .config(['$routeProvider',
+        function ($routeProvider) {
+            $routeProvider.
+                when('/search', {
+                    templateUrl: 'partials/search.html',
+                    controller: 'searchCtrl'
+                }).
+                when('/add', {
+                    templateUrl: 'partials/add.html',
+                    controller: 'addCtrl'
+                }).
+                when('/settings', {
+                    templateUrl: 'partials/settings.html',
+                    controller: 'settingsCtrl'
+                }).
+                otherwise({
+                    redirectTo: '/search'
+                });
+        }])
     .service('es', function ($http, $q, $log) {
         var _endpoint = 'http://localhost:9200';
 
@@ -22,7 +41,7 @@ angular.module('esmngr', [])
                             "properties": {
                                 "title": { "type": "string", "index": "not_analyzed" },
                                 "description": { "type": "string", "index": "not_analyzed" },
-                                "url" : { "type": "string", "index": "not_analyzed" }
+                                "url": { "type": "string", "index": "not_analyzed" }
                             }
                         }
                     }
@@ -44,21 +63,21 @@ angular.module('esmngr', [])
             return $http.get(_endpoint);
         };
 
-        this.savePhoto = function(id, title, description, url){
-            return $http.put(_endpoint+'/images/photo/'+id, {
+        this.savePhoto = function (id, title, description, url) {
+            return $http.put(_endpoint + '/images/photo/' + id, {
                 "title": title,
                 "description": description,
-                "url":url
+                "url": url
             });
         }
 
-        this.search = function(text){
+        this.search = function (text) {
             var deferred = $q.defer();
 
-            $http.get(_endpoint+'/images/photo/_search?q='+text).then(function(response){
+            $http.get(_endpoint + '/images/photo/_search?q=' + text).then(function (response) {
                 $log.log('response is', response);
                 var results = [];
-                angular.forEach(response.data.hits.hits, function(hit){
+                angular.forEach(response.data.hits.hits, function (hit) {
                     results.push(hit._source);
                 });
 
@@ -68,7 +87,7 @@ angular.module('esmngr', [])
             return deferred.promise;
         }
     })
-    .controller('mainCtrl', function ($scope, $log, es) {
+    .controller('settingsCtrl', function ($scope, $log, es) {
         es.getStatus().then(function (status) {
             $log.log('connected to ' + status.data.name);
         });
@@ -80,15 +99,16 @@ angular.module('esmngr', [])
                 es.savePhoto(4, "Sassotetto", "Strada che conduce da Sassotetto a Bolognola ", "http://farm6.staticflickr.com/5250/5254415685_019348b088.jpg");
             });
         }
-
-        $scope.add = function(id, title, description, url){
+    })
+    .controller('addCtrl', function ($scope, es) {
+        $scope.add = function (id, title, description, url) {
             es.savePhoto(id, title, description, url);
         }
     })
-    .controller('searchCtrl', function($scope, es){
+    .controller('searchCtrl', function ($scope, es) {
         $scope.searchText = '';
 
-        $scope.search = function(){
+        $scope.search = function () {
             $scope.photos = es.search($scope.searchText);
         }
     });

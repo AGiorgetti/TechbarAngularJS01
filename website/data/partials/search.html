@@ -1,0 +1,12 @@
+<div class="row" data-ng-controller="searchCtrl">
+    <div class="col-xs-12">
+        <input type="search" ng-model="searchText" ng-change="search()">
+    </div>
+    <div class="col-xs-12 col-md-6" data-ng-repeat="p in photos">
+        <img title="p.title" ng-src="{{p.url}}"/>
+        <span>{{p.description}}</span>
+    </div>
+</div>
+<div class="row">
+    <pre>{{photos | json}}</pre>
+</div>
