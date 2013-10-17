@@ -7,7 +7,7 @@
     <script src="../js/angular-route.js"></script>
     <script src="esmanager.js"></script>
 </head>
-<body >
+<body data-ng-controller="pageCtrl">
 <!-- Static navbar -->
 <div class="navbar navbar-default navbar-static-top">
     <div class="container">
@@ -21,9 +21,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#search">Search</a></li>
-                <li><a href="#add">Add</a></li>
-                <li><a href="#settings">Settings</a></li>
+                <li ng-class="{active: activePage =='search'}"><a href="#search">Search</a></li>
+                <li ng-class="{active: activePage =='add'}"><a href="#add">Add</a></li>
+                <li ng-class="{active: activePage =='settings'}"><a href="#settings">Settings</a></li>
              </ul>
         </div>
         <!--/.nav-collapse -->

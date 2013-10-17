@@ -87,7 +87,13 @@ angular.module('esmngr', ['ngRoute'])
             return deferred.promise;
         }
     })
+    .controller('pageCtrl', function ($scope, $log, es) {
+        $scope.setActivePage = function(page){
+          $scope.activePage = page;
+        };
+    })
     .controller('settingsCtrl', function ($scope, $log, es) {
+        $scope.setActivePage('settings');
         es.getStatus().then(function (status) {
             $log.log('connected to ' + status.data.name);
         });
@@ -101,11 +107,13 @@ angular.module('esmngr', ['ngRoute'])
         }
     })
     .controller('addCtrl', function ($scope, es) {
+        $scope.setActivePage('add');
         $scope.add = function (id, title, description, url) {
             es.savePhoto(id, title, description, url);
         }
     })
     .controller('searchCtrl', function ($scope, es) {
+        $scope.setActivePage('search');
         $scope.searchText = '';
 
         $scope.search = function () {
