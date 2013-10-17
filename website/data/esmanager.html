@@ -8,12 +8,28 @@
     <script src="esmanager.js"></script>
 </head>
 <body data-ng-controller="mainCtrl">
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <h2>Image server</h2>
+<!-- Static navbar -->
+<div class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ImageSearch Server</a>
         </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#search">Search</a></li>
+                <li><a href="#add">Add</a></li>
+                <li><a href="#settings">Settings</a></li>
+             </ul>
+        </div>
+        <!--/.nav-collapse -->
     </div>
+</div>
+<div class="container">
     <div class="row">
         <div class="col-xs-12">
             <button class="btn btn-primary" ng-click="createIndex()">Create index</button>
@@ -40,14 +56,16 @@
                     <label for="photoDescription" class="col-lg-2 control-label">Description</label>
 
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="photoDescription" placeholder="Description" ng-model="description">
+                        <input type="text" class="form-control" id="photoDescription" placeholder="Description"
+                               ng-model="description">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="photoUrl" class="col-lg-2 control-label">Url</label>
 
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="photoUrl" placeholder="http://flickr.com/" ng-model="url">
+                        <input type="text" class="form-control" id="photoUrl" placeholder="http://flickr.com/"
+                               ng-model="url">
                     </div>
                 </div>
                 <div class="form-group">
